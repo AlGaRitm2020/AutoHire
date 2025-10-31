@@ -52,9 +52,12 @@
       border-radius: 6px;
       font-weight: 600;
       transition: 0.3s;
+      display: inline-block;
+      text-align: center;
     }
     .cta-btn:hover {
       background: #2ea043;
+      text-decoration: none;
     }
 
     /* ======== Hero ======== */
@@ -79,6 +82,51 @@
       max-width: 1000px;
       margin: 0 auto;
     }
+
+    /* ======== Скриншоты (карусель на всю ширину) ======== */
+    #screenshots {
+      padding: 0;
+      background: #0d1117;
+      overflow: hidden;
+    }
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 400%;
+    }
+    .carousel-slide {
+      min-width: 25%;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem;
+      gap: 0.6rem;
+    }
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #30363d;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .carousel-dot.active {
+      background: #58a6ff;
+    }
+
+    /* ======== Возможности ======== */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -110,6 +158,39 @@
       background: #161b22;
     }
 
+    /* ======== Форма демо ======== */
+    .demo-form {
+      max-width: 500px;
+      margin: 2rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .demo-form input {
+      padding: 0.8rem;
+      border-radius: 6px;
+      border: 1px solid #30363d;
+      background: #0d1117;
+      color: #e6edf3;
+      font-size: 1rem;
+    }
+    .demo-form input::placeholder {
+      color: #8b949e;
+    }
+    .demo-form button {
+      background: #238636;
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .demo-form button:hover {
+      background: #2ea043;
+    }
+
     /* ======== Footer ======== */
     footer {
       text-align: center;
@@ -120,8 +201,13 @@
     }
 
     @media (max-width: 768px) {
-      header { flex-direction: column; }
+      header { 
+        flex-direction: column; 
+        gap: 1rem;
+      }
       .hero h1 { font-size: 2rem; }
+      .carousel-slide { min-width: 100%; }
+      .carousel { width: 400%; }
     }
   </style>
 </head>
@@ -131,7 +217,7 @@
     <nav>
       <a href="#about">О продукте</a>
       <a href="#features">Возможности</a>
-      <a href="#dashboard">Интерфейс</a>
+      <a href="#screenshots">Интерфейс</a>
       <a href="#contact" class="cta-btn">Запросить демо</a>
     </nav>
   </header>
@@ -145,7 +231,7 @@
   <section id="about">
     <h2>Почему AutoHire?</h2>
     <p>AutoHire — интеллектуальная система подбора персонала, которая автоматизирует процесс найма: от поиска до финального отчёта. Работает 24/7, минимизирует предвзятость и экономит ресурсы HR-команды.</p>
-    <div class="features">
+    <div class="features" id="features">
       <div class="feature"><h3>🤖 Глубокий ИИ-анализ</h3><p>Оценка кандидатов на основе GitHub, соцсетей, проектной активности и интервью с помощью NLP.</p></div>
       <div class="feature"><h3>🔍 Интеграция с hh.ru</h3><p>Доступ к крупнейшей базе резюме и автоматический отбор лучших кандидатов.</p></div>
       <div class="feature"><h3>🎯 Без предвзятости</h3><p>Единые критерии оценки и постоянное улучшение моделей отбора.</p></div>
@@ -153,15 +239,18 @@
     </div>
   </section>
 
-  <section id="dashboard">
-    <h2>AutoHire Dashboard</h2>
-    <p>Современный интерфейс в стиле SIEM: визуальные панели, алерты о новых совпадениях, аналитика и поиск.</p>
-    <ul>
-      <li>📈 Карта вакансий, кандидатов и этапов найма</li>
-      <li>🔔 Алерты о топ-кандидатах (“Top match alerts”)</li>
-      <li>🧾 Карточки кандидатов с summary и контактами</li>
-      <li>💬 Интегрированные AI-интервью и анализ soft skills</li>
-    </ul>
+  <!-- Блок скриншотов -->
+  <section id="screenshots">
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <!-- Замените src на реальные пути к изображениям -->
+        <div class="carousel-slide"><img src="https://via.placeholder.com/1200x600/161b22/58a6ff?text=Dashboard+1" alt="Скриншот 1"></div>
+        <div class="carousel-slide"><img src="https://via.placeholder.com/1200x600/161b22/58a6ff?text=Dashboard+2" alt="Скриншот 2"></div>
+        <div class="carousel-slide"><img src="https://via.placeholder.com/1200x600/161b22/58a6ff?text=Dashboard+3" alt="Скриншот 3"></div>
+        <div class="carousel-slide"><img src="https://via.placeholder.com/1200x600/161b22/58a6ff?text=Dashboard+4" alt="Скриншот 4"></div>
+      </div>
+      <div class="carousel-nav" id="carousel-dots"></div>
+    </div>
   </section>
 
   <section id="compare">
@@ -198,11 +287,55 @@
   <section id="contact">
     <h2>Начните использовать AutoHire сегодня</h2>
     <p>Получите демо и закройте первую вакансию уже через неделю.</p>
-    <a href="#" class="cta-btn">Запросить демо</a>
+    <!-- Форма вместо ссылки -->
+    <form 
+      action="https://formspree.io/f/YOUR_FORM_ID" 
+      method="POST"
+      class="demo-form"
+    >
+      <input type="text" name="name" placeholder="Ваше имя" required />
+      <input type="email" name="email" placeholder="Ваш email" required />
+      <button type="submit">Запросить демо</button>
+    </form>
   </section>
 
   <footer>
     <p>© 2025 AutoHire — AI-driven recruitment platform</p>
   </footer>
+
+  <script>
+    // Карусель
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.getElementById('carousel');
+      const dotsContainer = document.getElementById('carousel-dots');
+      const slides = document.querySelectorAll('.carousel-slide');
+      let currentIndex = 0;
+
+      // Создаём точки
+      slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('carousel-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = document.querySelectorAll('.carousel-dot');
+
+      function goToSlide(index) {
+        currentIndex = index;
+        carousel.style.transform = `translateX(-${index * 25}%)`;
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+
+      // Автопрокрутка каждые 5 секунд
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        goToSlide(currentIndex);
+      }, 5000);
+    });
+  </script>
 </body>
 </html>
