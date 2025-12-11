@@ -99,9 +99,9 @@
     .feature:hover {
       transform: translateY(-4px);
     }
-    /* Лозунг — занимает 2 колонки на средних/больших экранах */
+    /* Лозунг — занимает 3 колонки */
     .feature.slogan {
-      grid-column: span 2;
+      grid-column: span 3;
       background: linear-gradient(135deg, #0d1117, #161b22);
       border: 1px solid #58a6ff;
       text-align: center;
@@ -131,7 +131,7 @@
       background: #161b22;
     }
 
-    /* ======== Скриншоты с описаниями ======== */
+    /* ======== Скриншоты ======== */
     #screenshots {
       padding: 4rem 3rem;
       background: #0d1117;
@@ -154,37 +154,47 @@
       background: #161b22;
     }
 
-    /* ======== Форма демо ======== */
-    .demo-form {
-      max-width: 500px;
-      margin: 2rem auto 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+    /* ======== Кнопка "Запросить демо" внизу ======== */
+    #contact {
+      text-align: center;
+      padding: 4rem 3rem;
     }
-    .demo-form input {
-      padding: 0.8rem;
-      border-radius: 6px;
+    #contact h2 {
+      margin-bottom: 1rem;
+    }
+    #contact p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: #9ca3af;
+    }
+    .contact-highlight {
+      display: inline-block;
+      background: linear-gradient(135deg, #0d1117, #161b22);
       border: 1px solid #30363d;
-      background: #0d1117;
-      color: #e6edf3;
-      font-size: 1rem;
-    }
-    .demo-form input::placeholder {
-      color: #8b949e;
-    }
-    .demo-form button {
-      background: #238636;
-      color: white;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 6px;
+      border-radius: 10px;
+      padding: 1.2rem 2rem;
+      text-align: center;
+      text-decoration: none;
+      color: #58a6ff;
       font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
+      font-size: 1.1rem;
+      transition: transform 0.2s, border-color 0.3s;
     }
-    .demo-form button:hover {
-      background: #2ea043;
+    .contact-highlight:hover {
+      transform: translateY(-2px);
+      border-color: #58a6ff;
+      box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+      text-decoration: none;
+    }
+    /* Анимация мигания */
+    .contact-highlight.highlight {
+      border-color: #58a6ff;
+      box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.6);
+      animation: pulseHighlight 1.2s ease-out;
+    }
+    @keyframes pulseHighlight {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.6); }
+      50% { box-shadow: 0 0 0 8px rgba(88, 166, 255, 0); }
     }
 
     /* ======== Footer ======== */
@@ -197,14 +207,10 @@
     }
 
     @media (max-width: 768px) {
-      header { 
-        flex-direction: column; 
-        gap: 1rem;
-      }
+      header { flex-direction: column; gap: 1rem; }
       .hero h1 { font-size: 2rem; }
-      .feature.slogan {
-        grid-column: span 1;
-      }
+      .feature.slogan { grid-column: span 1; }
+      .contact-highlight { width: 90%; padding: 1rem; }
     }
   </style>
 </head>
@@ -215,45 +221,42 @@
       <a href="#about">О продукте</a>
       <a href="#features">Возможности</a>
       <a href="#screenshots">Интерфейс</a>
-      <a href="#contact" class="cta-btn">Запросить демо</a>
+      <a href="#contact" class="demo-trigger cta-btn">Запросить демо</a>
     </nav>
   </header>
 
   <section class="hero">
     <h1>AutoHire — ваш ИИ-рекрутёр нового поколения</h1>
     <p>Сократите время и стоимость найма в 3 раза. AutoHire анализирует тысячи кандидатов, оценивает их навыки и мотивацию с помощью AI и предлагает лучших — за 4–7 дней.</p>
-    <a href="#contact" class="cta-btn">Попробовать бесплатно</a>
+    <a href="#contact" class="demo-trigger cta-btn">Попробовать бесплатно</a>
   </section>
 
   <section id="about">
     <h2>Почему AutoHire?</h2>
     <p>AutoHire — интеллектуальная система подбора персонала, которая автоматизирует процесс найма: от поиска до финального отчёта. Работает 24/7, минимизирует предвзятость и экономит ресурсы HR-команды.</p>
     <div class="features" id="features">
-      <div class="feature"><h3>🤖 Глубокий ИИ-анализ</h3><p>Оценка кандидатов на основе GitHub, соцсетей, проектной активности и интервью с помощью NLP.</p></div>
-      <div class="feature"><h3>🔍 Интеграция с hh.ru</h3><p>Доступ к крупнейшей базе резюме и автоматический отбор лучших кандидатов.</p></div>
+      <div class="feature"><h3>🌐 Кроссплатформенный поиск</h3><p>Анализ профессиональных источников (GitHub, Habr, Stack Overflow, соцсети).</p></div>
+      <div class="feature"><h3>📊 360°-профиль</h3><p>Оценка hard/soft skills, экспертизы, мотивации и культурного соответствия.</p></div>
+      <div class="feature"><h3>⏱️ Работа 24/7</h3><p>Активный target поиск по платформам без перерывов.</p></div>
       <div class="feature"><h3>🎯 Без предвзятости</h3><p>Единые критерии оценки и постоянное улучшение моделей отбора.</p></div>
-      <div class="feature"><h3>⚡ Быстрый результат</h3><p>Закрытие вакансии за 4–7 дней, вдвое меньше затрат и рутины.</p></div>
-      <!-- Лозунг — занимает 2 колонки -->
+      <div class="feature"><h3>⏱️ Ускоренный поиск</h3><p>Сокращение времени холодного поиска с 3-4 часов до 30-40 минут.</p></div>
+      <div class="feature"><h3>✅ Автоматизация</h3><p>Автоматическое формирование short-list кандидатов на основе алгоритмической модели культурного фита команды.</p></div>
       <div class="feature slogan">
         <h3>AutoHire — ИИ от отклика до оффера</h3>
       </div>
     </div>
   </section>
 
-  <!-- Блок скриншотов с описаниями -->
   <section id="screenshots">
     <h2 style="text-align: center; margin-bottom: 3rem;">Интерфейс AutoHire</h2>
-
     <div class="screenshot-item">
       <p><strong>Dashboard</strong> — единая панель управления всеми этапами найма в реальном времени.</p>
       <img src="screenshot1.png" alt="AutoHire Dashboard">
     </div>
-
     <div class="screenshot-item">
       <p><strong>Сервис для менеджмента вакансий</strong> — создание, редактирование и отслеживание статуса каждой вакансии.</p>
       <img src="screenshot2.png" alt="Менеджмент вакансий">
     </div>
-
     <div class="screenshot-item">
       <p><strong>Активный поиск по различным площадкам</strong> — автоматический сбор и анализ кандидатов с hh.ru, LinkedIn, GitHub и других источников.</p>
       <img src="screenshot3.png" alt="Активный поиск кандидатов">
@@ -263,50 +266,60 @@
   <section id="compare">
     <h2>Почему бизнес выбирает AutoHire</h2>
     <table>
-      <tr>
-        <th>Показатель</th>
-        <th>Традиционный найм</th>
-        <th>AutoHire</th>
-      </tr>
-      <tr>
-        <td>Время закрытия вакансии</td>
-        <td>3–6 недель</td>
-        <td><b>4–7 дней</b></td>
-      </tr>
-      <tr>
-        <td>Стоимость найма</td>
-        <td>15–25% от годового дохода</td>
-        <td><b>в 2 раза меньше</b></td>
-      </tr>
-      <tr>
-        <td>Предвзятость</td>
-        <td>Высокая</td>
-        <td><b>Минимальная</b></td>
-      </tr>
-      <tr>
-        <td>Качество подбора</td>
-        <td>Среднее</td>
-        <td><b>Максимальная релевантность</b></td>
-      </tr>
+      <tr><th>Показатель</th><th>Традиционный найм</th><th>AutoHire</th></tr>
+      <tr><td>Время закрытия вакансии</td><td>3–6 недель</td><td><b>4–7 дней</b></td></tr>
+      <tr><td>Стоимость найма</td><td>15–25% от годового дохода</td><td><b>в 2-3 раза меньше</b></td></tr>
+      <tr><td>Время холодного поиска</td><td>3-4 часа</td><td><b>30-40 минут</b></td></tr>
+      <tr><td>Предвзятость</td><td>Высокая</td><td><b>Минимальная</b></td></tr>
+      <tr><td>Качество подбора</td><td>Среднее</td><td><b>Максимальная релевантность и культурный фит</b></td></tr>
+      <tr><td>Ручная работа</td><td>Высокая</td><td><b>Автоматизировано</b></td></tr>
     </table>
   </section>
 
   <section id="contact">
     <h2>Начните использовать AutoHire сегодня</h2>
     <p>Получите демо и закройте первую вакансию уже через неделю.</p>
-    <form 
-      action="https://formspree.io/f/YOUR_FORM_ID"
-      method="POST"
-      class="demo-form"
+    <a 
+      id="demo-button"
+      href="https://docs.google.com/forms/d/e/1FAIpQLScYXWFz8h9BG5C4E8OfCsqJV4rH4i3oHxzzgKJZNHCuvJA3PA/viewform?usp=publish-editor" 
+      target="_blank"
+      rel="noopener noreferrer"
+      class="contact-highlight"
     >
-      <input type="text" name="name" placeholder="Ваше имя" required />
-      <input type="email" name="email" placeholder="Ваш email" required />
-      <button type="submit">Запросить демо</button>
-    </form>
+      Запросить демо
+    </a>
   </section>
 
   <footer>
     <p>© 2025 AutoHire — AI-driven recruitment platform</p>
   </footer>
+
+  <!-- JavaScript для анимации -->
+  <script>
+    document.querySelectorAll('.demo-trigger').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const target = document.querySelector('#contact');
+        if (target) {
+          // Плавная прокрутка
+          window.scrollTo({
+            top: target.offsetTop - 80, // компенсация хедера
+            behavior: 'smooth'
+          });
+
+          // После прокрутки — мигание
+          setTimeout(() => {
+            const btn = document.getElementById('demo-button');
+            if (btn) {
+              btn.classList.add('highlight');
+              // Убрать класс после анимации
+              setTimeout(() => btn.classList.remove('highlight'), 1200);
+            }
+          }, 800); // небольшая задержка, чтобы кнопка была в зоне видимости
+        }
+      });
+    });
+  </script>
 </body>
 </html>
